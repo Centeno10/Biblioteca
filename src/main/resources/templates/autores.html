@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registro de Autores</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1, h2 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        form { margin-top: 20px; padding: 15px; border: 1px solid #eee; border-radius: 5px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"] { width: calc(100% - 22px); padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        button { background-color: #4CAF50; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+        .nav-links { margin-bottom: 20px; }
+        .nav-links a { margin-right: 15px; text-decoration: none; color: #007bff; }
+        .nav-links a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>Registro de Autores</h1>
+
+    <div class="nav-links">
+        <a href="/autores-web">Gestionar Autores</a>
+        <a href="/libros-web">Gestionar Libros</a>
+    </div>
+
+    <h2>Añadir Nuevo Autor</h2>
+    <form th:action="@{/autores-web/guardar}" th:object="${nuevoAutor}" method="post">
+        <label for="nombreAutor">Nombre:</label>
+        <input type="text" id="nombreAutor" th:field="*{nombre}" required>
+
+        <label for="nacionalidadAutor">Nacionalidad:</label>
+        <input type="text" id="nacionalidadAutor" th:field="*{nacionalidad}" required>
+
+        <button type="submit">Guardar Autor</button>
+    </form>
+
+    <h2>Lista de Autores</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Nacionalidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="autor : ${autores}">
+                <td th:text="${autor.idAutor}"></td>
+                <td th:text="${autor.nombre}"></td>
+                <td th:text="${autor.nacionalidad}"></td>
+            </tr>
+            <tr th:if="${autores.empty}">
+                <td colspan="3">No hay autores registrados.</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

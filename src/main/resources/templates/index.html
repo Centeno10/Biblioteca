@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Bienvenido a la Biblioteca</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.1em;
+            line-height: 1.6em;
+            margin-bottom: 25px;
+        }
+        .menu-links a {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 12px 25px;
+            margin: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.05em;
+            transition: background-color 0.3s ease;
+        }
+        .menu-links a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¡Bienvenido al Sistema de Gestión de Biblioteca!</h1>
+        <p>Aquí puedes gestionar los autores y los libros de tu biblioteca.</p>
+
+        <div class="menu-links">
+            <a href="/autores-web">Ir a Gestión de Autores</a>
+            <a href="/libros-web">Ir a Gestión de Libros</a>
+        </div>
+
+        <p style="margin-top: 30px; font-size: 0.9em; color: #666;">
+            Desarrollado con Spring Boot y Thymeleaf.
+        </p>
+    </div>
+</body>
+</html>

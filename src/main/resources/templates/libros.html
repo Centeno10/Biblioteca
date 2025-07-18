@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registro de Libros</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1, h2 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        form { margin-top: 20px; padding: 15px; border: 1px solid #eee; border-radius: 5px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], select { width: calc(100% - 22px); padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        button { background-color: #4CAF50; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+        .nav-links { margin-bottom: 20px; }
+        .nav-links a { margin-right: 15px; text-decoration: none; color: #007bff; }
+        .nav-links a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>Registro de Libros</h1>
+
+    <div class="nav-links">
+        <a href="/autores-web">Gestionar Autores</a>
+        <a href="/libros-web">Gestionar Libros</a>
+    </div>
+
+    <h2>Añadir Nuevo Libro</h2>
+    <form th:action="@{/libros-web/guardar}" th:object="${nuevoLibro}" method="post">
+        <label for="tituloLibro">Título:</label>
+        <input type="text" id="tituloLibro" th:field="*{titulo}" required>
+
+        <label for="generoLibro">Género:</label>
+        <input type="text" id="generoLibro" th:field="*{genero}" required>
+
+        <label for="anioPublicacion">Año de Publicación:</label>
+        <input type="text" id="anioPublicacion" th:field="*{anioPublicacion}" required>
+
+        <label for="autorLibro">Autor:</label>
+        <select id="autorLibro" th:field="*{autor.idAutor}" required>
+            <option value="">-- Seleccione un autor --</option>
+            <option th:each="autor : ${autoresDisponibles}"
+                    th:value="${autor.idAutor}"
+                    th:text="${autor.nombre}">Autor</option>
+        </select>
+
+        <button type="submit">Guardar Libro</button>
+    </form>
+
+    <h2>Lista de Libros</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Género</th>
+                <th>Año de Publicación</th>
+                <th>Autor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="libro : ${libros}">
+                <td th:text="${libro.idLibro}"></td>
+                <td th:text="${libro.titulo}"></td>
+                <td th:text="${libro.genero}"></td>
+                <td th:text="${libro.anioPublicacion}"></td>
+                <td th:text="${libro.autor?.nombre}"></td> </tr>
+            <tr th:if="${libros.empty}">
+                <td colspan="5">No hay libros registrados.</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
